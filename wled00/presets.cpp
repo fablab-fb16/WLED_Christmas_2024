@@ -95,13 +95,45 @@ bool getPresetName(byte index, String& name)
   return presetExists;
 }
 
-void initPresetsFile()
-{
+// void initPresetsFile()
+// {
+//   if (WLED_FS.exists(getFileName())) return;
+
+//   StaticJsonDocument<64> doc;
+//   JsonObject sObj = doc.to<JsonObject>();
+//   sObj.createNestedObject("0");
+//   File f = WLED_FS.open(getFileName(), "w");
+//   if (!f) {
+//     errorFlag = ERR_FS_GENERAL;
+//     return;
+//   }
+//   serializeJson(doc, f);
+//   f.close();
+// }
+
+void initPresetsFile() {
+  // Check if the file already exists
   if (WLED_FS.exists(getFileName())) return;
 
-  StaticJsonDocument<64> doc;
-  JsonObject sObj = doc.to<JsonObject>();
-  sObj.createNestedObject("0");
+  // Create a JSON document
+  StaticJsonDocument<512> doc;
+  JsonObject root = doc.to<JsonObject>();
+
+  // Preset #0
+  JsonObject presetObj = root.createNestedObject("0");
+  presetObj[""] = "";
+
+  // Preset #1
+  JsonObject preset1 = root.createNestedObject("1");
+  preset1["win"] = "FX=~";
+  preset1["n"] = "Next-FX";
+
+  // Preset #2
+  JsonObject preset2 = root.createNestedObject("2");
+  preset2["win"] = "T=2";
+  preset2["n"] = "Toggle";
+
+  // Write the JSON to the file
   File f = WLED_FS.open(getFileName(), "w");
   if (!f) {
     errorFlag = ERR_FS_GENERAL;
@@ -109,7 +141,11 @@ void initPresetsFile()
   }
   serializeJson(doc, f);
   f.close();
+
+  // Clear memory
+  doc.clear();
 }
+
 
 bool applyPreset(byte index, byte callMode)
 {
