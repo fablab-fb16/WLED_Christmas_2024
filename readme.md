@@ -10,11 +10,25 @@
 
   </p>
 
-# Welcome to my project WLED! ✨
+# Custom version of WLED for Christmas Soldering 2024! ✨
+
+Modifications to the original WLED to fit the soldering kit:
+- Set LED count to 11
+- Set LED color mode to RGB
+- Default Wifi AP SSID will have a part of the ESPs MAC address as suffix to make it unique, e.g. "WLED-AP-c30479"
+- Two custom presets for #1 switching blink mode and #2 on/off
+- Linked presets to button presses (short / long press)
+
+How to get it?
+
+Just flash the pre-build binary for ESP32-C3 that we provide [here](https://github.com/fablab-fb16/christmas_soldering_2024/tree/main/WLED_Firmware).
+
+Or follow the [original WLED install instructions](https://kno.wled.ge/advanced/compiling-wled/) but use this Repo as source to build our modified version by yourself.
+
+## ⚙️ Features
 
 A fast and feature-rich implementation of an ESP32 and ESP8266 webserver to control NeoPixel (WS2812B, WS2811, SK6812) LEDs or also SPI based chipsets like the WS2801 and APA102!
 
-## ⚙️ Features
 - WS2812FX library with more than 100 special effects  
 - FastLED noise effects and 50 palettes  
 - Modern UI with color, effect and segment controls  
